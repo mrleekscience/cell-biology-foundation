@@ -1,0 +1,2549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mr Leek Science — AQA Combined Science: Foundation Cell Biology Quiz</title>
+  <!-- Load Tailwind CSS for responsive utility helpers alongside custom dark-mode edtech styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg-dark: #0b1120;
+      --panel-bg: #0f172a;
+      --card-bg: #1e293b;
+      --border-subtle: rgba(148, 163, 184, 0.2);
+      --emerald: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.25);
+      --cyan: #38bdf8;
+      --purple: #a855f7;
+      --rose: #fb7185;
+      --amber: #facc15;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at top right, #112a2e 0%, var(--bg-dark) 58%);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    .app-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 18px 52px;
+    }
+
+    /* TOP BAR — Unaltered top-left logo only */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      max-height: 76px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .brand h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .brand-sub {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    .site-link {
+      color: var(--cyan);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .site-link:hover {
+      color: var(--emerald);
+      text-decoration: underline;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .user-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.38);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+    }
+
+    .user-chip .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald);
+    }
+
+    /* BUTTONS & INPUTS */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--emerald), var(--cyan));
+      color: #041019;
+      font-weight: 700;
+      border: none;
+      padding: 13px 22px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.96rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px var(--emerald-glow);
+    }
+
+    .full-width {
+      width: 100%;
+    }
+
+    .btn-ghost {
+      background: var(--panel-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 15px;
+      border-radius: 11px;
+      cursor: pointer;
+      font-size: 0.86rem;
+      font-weight: 600;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .btn-strengths {
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      color: #bae6fd;
+      padding: 9px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: all 0.15s ease;
+    }
+
+    .btn-strengths:hover {
+      background: rgba(56, 189, 248, 0.25);
+      border-color: var(--cyan);
+      transform: translateY(-1px);
+    }
+
+    .btn-retry-missed {
+      background: rgba(250, 204, 21, 0.16);
+      border: 1px solid rgba(250, 204, 21, 0.48);
+      color: #fef08a;
+      font-weight: 700;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.15s ease;
+    }
+
+    .btn-retry-missed:hover {
+      background: rgba(250, 204, 21, 0.26);
+      transform: translateY(-1px);
+    }
+
+    /* VIEWS */
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    /* START CARD — Clean without central logo */
+    .login-card {
+      max-width: 600px;
+      margin: 14px auto;
+      background: var(--panel-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .login-header {
+      text-align: center;
+    }
+
+    .pill-tag {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.15);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .login-header h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .login-header p {
+      color: var(--text-muted);
+      font-size: 0.93rem;
+      margin-bottom: 22px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-group label {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    .form-group input {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 12px 14px;
+      border-radius: 11px;
+      font-size: 0.96rem;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .form-group input:focus {
+      border-color: var(--emerald);
+    }
+
+    /* SELECTOR GRIDS */
+    .option-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 9px;
+    }
+
+    .option-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 9px;
+    }
+
+    @media (max-width: 560px) {
+      .option-grid-4,
+      .option-grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .choice-pill-btn {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 11px 8px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 2px;
+      transition: all 0.15s ease;
+    }
+
+    .choice-pill-btn strong {
+      font-size: 0.9rem;
+    }
+
+    .choice-pill-btn span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .choice-pill-btn:hover {
+      border-color: var(--cyan);
+    }
+
+    .choice-pill-btn.active {
+      border-color: var(--emerald);
+      background: rgba(16, 185, 129, 0.16);
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.18);
+    }
+
+    .choice-pill-btn.active strong {
+      color: #6ee7b7;
+    }
+
+    .error-banner {
+      background: rgba(251, 113, 133, 0.14);
+      border: 1px solid var(--rose);
+      color: #fecdd3;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+    }
+
+    .login-footer {
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    /* HUD & PROGRESS */
+    .hud-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .hud-stats {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .stat-pill {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 14px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .stat-val {
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+
+    .stat-pill.streak .stat-val {
+      color: var(--amber);
+    }
+
+    .stat-pill.score .stat-val {
+      color: var(--emerald);
+    }
+
+    .lifelines {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-tool {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #bae6fd;
+      padding: 10px 14px;
+      border-radius: 11px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-tool:hover:not(:disabled) {
+      background: rgba(56, 189, 248, 0.22);
+      border-color: var(--cyan);
+    }
+
+    .btn-tool:disabled {
+      opacity: 0.38;
+      cursor: not-allowed;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: var(--panel-bg);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 22px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--emerald), var(--cyan));
+      transition: width 0.3s ease;
+    }
+
+    /* SPLIT ARENA */
+    .arena-grid {
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .arena-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .specimen-panel,
+    .question-panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .specimen-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 0.78rem;
+    }
+
+    .specimen-tag {
+      color: var(--cyan);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    .specimen-topic {
+      color: var(--text-muted);
+    }
+
+    .specimen-canvas {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background: #080d1a;
+    }
+
+    .clue-box {
+      margin-top: 12px;
+      background: rgba(250, 204, 21, 0.12);
+      border: 1px solid rgba(250, 204, 21, 0.4);
+      color: #fef08a;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+    }
+
+    .q-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      font-size: 0.8rem;
+    }
+
+    .aqa-ref {
+      color: var(--emerald);
+      font-weight: 700;
+    }
+
+    .category-badge {
+      background: rgba(56, 189, 248, 0.16);
+      color: #bae6fd;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 3px 11px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .question-text {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+      color: var(--text-main);
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      text-align: left;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 14px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.15s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--cyan);
+      background: #24334d;
+    }
+
+    .opt-letter {
+      background: rgba(148, 163, 184, 0.16);
+      color: var(--cyan);
+      font-weight: 800;
+      min-width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.84rem;
+      flex-shrink: 0;
+    }
+
+    .option-btn.correct {
+      border-color: var(--emerald);
+      background: rgba(16, 185, 129, 0.18);
+    }
+
+    .option-btn.correct .opt-letter {
+      background: var(--emerald);
+      color: #041019;
+    }
+
+    .option-btn.wrong {
+      border-color: var(--rose);
+      background: rgba(251, 113, 133, 0.18);
+    }
+
+    .option-btn.wrong .opt-letter {
+      background: var(--rose);
+      color: #041019;
+    }
+
+    .option-btn.eliminated {
+      opacity: 0.28;
+      text-decoration: line-through;
+    }
+
+    .feedback-drawer {
+      margin-top: 18px;
+      padding: 16px;
+      background: #0a101f;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+    }
+
+    .feedback-title {
+      font-weight: 800;
+      font-size: 0.94rem;
+      margin-bottom: 6px;
+    }
+
+    .feedback-drawer p {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-bottom: 14px;
+    }
+
+    /* RESULTS & DIAGNOSTIC DASHBOARD */
+    .results-wrapper {
+      max-width: 820px;
+      margin: 14px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .results-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    }
+
+    .grade-ring {
+      width: 112px;
+      height: 112px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      border: 3px solid var(--emerald);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 28px var(--emerald-glow);
+    }
+
+    .grade-sub {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .grade-ring strong {
+      font-size: 1.85rem;
+      color: var(--emerald);
+      line-height: 1.15;
+    }
+
+    .res-subline {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      margin-top: 6px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .res-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    @media (max-width: 560px) {
+      .res-metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .metric-box {
+      background: var(--card-bg);
+      padding: 12px 8px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .metric-box span {
+      display: block;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .metric-box strong {
+      font-size: 1.08rem;
+    }
+
+    .res-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* TOPIC DIAGNOSTICS PANEL */
+    .diagnostic-panel,
+    .review-panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 26px;
+    }
+
+    .section-heading {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .section-sub {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .topic-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .topic-cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .diag-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .diag-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .status-tag.strength {
+      background: rgba(16, 185, 129, 0.18);
+      color: #6ee7b7;
+    }
+
+    .status-tag.developing {
+      background: rgba(250, 204, 21, 0.18);
+      color: #fef08a;
+    }
+
+    .status-tag.weakness {
+      background: rgba(251, 113, 133, 0.18);
+      color: #fecdd3;
+    }
+
+    .status-tag.untested {
+      background: rgba(148, 163, 184, 0.16);
+      color: var(--text-muted);
+    }
+
+    .topic-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: #0b1120;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .topic-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    .diag-tip {
+      font-size: 0.81rem;
+      color: #cbd5e1;
+      line-height: 1.45;
+    }
+
+    /* QUESTION REVIEW LIST */
+    .review-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .review-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .review-item.is-correct {
+      border-left: 4px solid var(--emerald);
+    }
+
+    .review-item.is-wrong {
+      border-left: 4px solid var(--rose);
+    }
+
+    .review-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 0.78rem;
+    }
+
+    .review-q-text {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .review-answers {
+      font-size: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .review-exp {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      background: rgba(11, 17, 32, 0.55);
+      padding: 9px 12px;
+      border-radius: 8px;
+    }
+
+    .results-footer-link {
+      text-align: center;
+      padding-top: 8px;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    /* LIVE MODAL FOR MID-QUIZ DIAGNOSTICS */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 6, 14, 0.84);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 999;
+    }
+
+    .modal-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      max-width: 640px;
+      width: 100%;
+      padding: 24px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .btn-close {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .modal-footer {
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- TOP BAR: Unaltered top-left Mr Leek Science logo only -->
+    <header class="top-bar">
+      <div class="brand">
+        <img id="headerLogo" src="mrleeksciencelogo.png" alt="Mr Leek Science Logo" class="brand-logo" />
+        <div>
+          <h1>GCSE Combined Science: Cell Biology (Foundation)</h1>
+          <div class="brand-sub">
+            <span>AQA Trilogy (8464) • Paper 1 Revision</span>
+            <span>•</span>
+            <a href="https://mrleekscience.co.uk" target="_blank" rel="noopener noreferrer" class="site-link">mrleekscience.co.uk ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <div id="userChip" class="user-chip" style="display:none;">
+          <span class="dot"></span>
+          <strong id="chipName">Student</strong>
+        </div>
+        <button id="btnStrengths" class="btn-strengths" style="display:none;" onclick="openAnalysisModal()">
+          📊 Strengths &amp; Weaknesses
+        </button>
+        <button id="btnSwitchUser" class="btn-ghost" style="display:none;" onclick="resetToStart()">Change Settings</button>
+      </div>
+    </header>
+
+    <!-- VIEW 1: START SCREEN -->
+    <section id="viewLogin" class="view active">
+      <div class="login-card">
+        <div class="login-header">
+          <div class="pill-tag">AQA Combined Science: Trilogy (8464) — Foundation Tier</div>
+          <h2>Cell Biology Foundation Quiz</h2>
+          <p>Clear, step-by-step Foundation revision questions with instant feedback and topic diagnostics.</p>
+        </div>
+
+        <form id="loginForm" class="login-form" onsubmit="handleStart(event)">
+          <div class="form-group">
+            <label for="studentName">Student Name</label>
+            <input type="text" id="studentName" placeholder="Enter your name" required maxlength="40" autocomplete="name" />
+          </div>
+
+          <div class="form-group">
+            <label>Choose Topic Focus</label>
+            <div class="option-grid-2" id="topicSelector">
+              <button type="button" class="choice-pill-btn active" data-topic="ALL" onclick="selectTopic('ALL', this)">
+                <strong>All Topics</strong>
+                <span>Full Cell Biology Mix (50 Qs)</span>
+              </button>
+              <button type="button" class="choice-pill-btn" data-topic="Cell Structure" onclick="selectTopic('Cell Structure', this)">
+                <strong>Cell Structure</strong>
+                <span>Cells, Microscopes &amp; Specialised</span>
+              </button>
+              <button type="button" class="choice-pill-btn" data-topic="Cell Division" onclick="selectTopic('Cell Division', this)">
+                <strong>Cell Division</strong>
+                <span>Chromosomes, Mitosis &amp; Stem Cells</span>
+              </button>
+              <button type="button" class="choice-pill-btn" data-topic="Transport in Cells" onclick="selectTopic('Transport in Cells', this)">
+                <strong>Transport in Cells</strong>
+                <span>Diffusion, Osmosis &amp; Active Transport</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Select Number of Questions</label>
+            <div class="option-grid-4" id="lengthSelector">
+              <button type="button" class="choice-pill-btn active" data-count="10" onclick="selectLength(10, this)">
+                <strong>10 Questions</strong>
+                <span>Quick Practice</span>
+              </button>
+              <button type="button" class="choice-pill-btn" data-count="20" onclick="selectLength(20, this)">
+                <strong>20 Questions</strong>
+                <span>Standard Set</span>
+              </button>
+              <button type="button" class="choice-pill-btn" data-count="30" onclick="selectLength(30, this)">
+                <strong>30 Questions</strong>
+                <span>Extended Revision</span>
+              </button>
+              <button type="button" class="choice-pill-btn" data-count="50" onclick="selectLength(50, this)">
+                <strong>All Questions</strong>
+                <span>Full Topic Bank</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="loginError" class="error-banner" style="display:none;"></div>
+
+          <button type="submit" class="btn-primary full-width">Start Quiz →</button>
+        </form>
+
+        <div class="login-footer">
+          <span>Created by <strong>Mr Leek Science</strong></span>
+          <a href="https://mrleekscience.co.uk" target="_blank" rel="noopener noreferrer" class="site-link">Visit mrleekscience.co.uk →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: ACTIVE QUIZ ARENA -->
+    <section id="viewQuiz" class="view">
+      <div class="hud-bar">
+        <div class="hud-stats">
+          <div class="stat-pill">
+            <span class="stat-label">QUESTION</span>
+            <span class="stat-val" id="hudProgress">1 / 10</span>
+          </div>
+          <div class="stat-pill streak">
+            <span class="stat-label">STREAK</span>
+            <span class="stat-val" id="hudStreak">0 🔥</span>
+          </div>
+          <div class="stat-pill score">
+            <span class="stat-label">SCORE</span>
+            <span class="stat-val" id="hudScore">0</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-label">TIME</span>
+            <span class="stat-val" id="hudTimer">00:00</span>
+          </div>
+        </div>
+
+        <div class="lifelines">
+          <button id="btn5050" class="btn-tool" onclick="use5050()">⚡ 50/50 Hint</button>
+          <button id="btnClue" class="btn-tool" onclick="useClue()">💡 Helpful Clue</button>
+        </div>
+      </div>
+
+      <div class="progress-track">
+        <div id="progressBarFill" class="progress-fill" style="width: 10%;"></div>
+      </div>
+
+      <div class="arena-grid">
+        <div class="specimen-panel">
+          <div class="specimen-header">
+            <span class="specimen-tag" id="specimenTag">DIAGRAM 01</span>
+            <span class="specimen-topic" id="specimenTopic">Cell Structure</span>
+          </div>
+          <div id="specimenCanvas" class="specimen-canvas"></div>
+          <div id="clueBox" class="clue-box" style="display:none;"></div>
+        </div>
+
+        <div class="question-panel">
+          <div class="q-meta">
+            <span class="aqa-ref" id="qRef">AQA 8464 Foundation</span>
+            <span class="category-badge" id="qCategoryBadge">Cell Structure</span>
+          </div>
+
+          <h2 id="questionText" class="question-text">Loading question...</h2>
+
+          <div id="optionsContainer" class="options-list"></div>
+
+          <div id="feedbackDrawer" class="feedback-drawer" style="display:none;">
+            <div class="feedback-title" id="feedbackTitle">Explanation</div>
+            <p id="feedbackText"></p>
+            <button id="btnNext" class="btn-primary" onclick="nextQuestion()">Next Question →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: RESULTS & DIAGNOSTIC DASHBOARD -->
+    <section id="viewResults" class="view">
+      <div class="results-wrapper">
+        <div class="results-card">
+          <div class="grade-ring">
+            <span class="grade-sub">FOUNDATION</span>
+            <strong id="resGrade">5-5</strong>
+          </div>
+          <h2 id="resHeadline">Great Effort!</h2>
+          <p id="resSubline" class="res-subline"></p>
+
+          <div class="res-metrics">
+            <div class="metric-box">
+              <span>SCORE</span>
+              <strong id="resScore">0 / 10</strong>
+            </div>
+            <div class="metric-box">
+              <span>ACCURACY</span>
+              <strong id="resPercent">0%</strong>
+            </div>
+            <div class="metric-box">
+              <span>BEST STREAK</span>
+              <strong id="resStreak">0</strong>
+            </div>
+            <div class="metric-box">
+              <span>TIME TAKEN</span>
+              <strong id="resTime">00:00</strong>
+            </div>
+          </div>
+
+          <div class="res-actions">
+            <button id="btnRetryMissed" class="btn-retry-missed" style="display:none;" onclick="retryMissedQuestions()">
+              🎯 Retry Missed Questions (<span id="missedCountBadge">0</span>)
+            </button>
+            <button class="btn-primary" onclick="restartQuiz()">↻ Take Another Quiz</button>
+            <button class="btn-ghost" onclick="resetToStart()">Change Topic or Length</button>
+          </div>
+        </div>
+
+        <!-- TOPIC BREAKDOWN & REVISION TIPS -->
+        <div class="diagnostic-panel">
+          <h3 class="section-heading">📊 Topic Strengths &amp; Weaknesses</h3>
+          <p class="section-sub">Your performance across the three AQA Foundation Cell Biology areas with targeted revision advice.</p>
+          <div id="resultsTopicGrid" class="topic-cards-grid"></div>
+        </div>
+
+        <!-- FULL QUESTION REVIEW -->
+        <div class="review-panel">
+          <h3 class="section-heading">📝 Full Question Review</h3>
+          <p class="section-sub">Check every question you answered, compare your choice with the correct answer, and read the revision note.</p>
+          <div id="reviewListContainer" class="review-list"></div>
+        </div>
+
+        <div class="results-footer-link">
+          More AQA GCSE Combined Science revision resources at
+          <a href="https://mrleekscience.co.uk" target="_blank" rel="noopener noreferrer" class="site-link">mrleekscience.co.uk ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MID-QUIZ LIVE DIAGNOSTIC MODAL -->
+    <div id="analysisModal" class="modal-backdrop" style="display:none;" onclick="closeAnalysisOnBackdrop(event)">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <h3>📊 Live Strengths &amp; Weaknesses</h3>
+            <p id="analysisSubtitle" style="font-size:0.84rem; color:var(--text-muted);">Progress so far in this session</p>
+          </div>
+          <button class="btn-close" onclick="closeAnalysisModal()">✕</button>
+        </div>
+
+        <div id="modalTopicGrid" class="topic-cards-grid" style="grid-template-columns: 1fr;"></div>
+
+        <div class="modal-footer">
+          <a href="https://mrleekscience.co.uk" target="_blank" rel="noopener noreferrer" class="site-link">mrleekscience.co.uk</a>
+          <button class="btn-primary" onclick="closeAnalysisModal()">Back to Quiz</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SPECIMEN_SVGS = {
+      mitochondria: `
+        <svg viewBox="0 0 360 210" width="100%" height="100%">
+          <rect width="360" height="210" rx="14" fill="#080d1a"/>
+          <ellipse cx="180" cy="105" rx="140" ry="84" fill="#111c33" stroke="#38bdf8" stroke-width="2.5"/>
+          <circle cx="130" cy="100" r="32" fill="#3b1d5e" stroke="#a855f7" stroke-width="2"/>
+          <text x="130" y="104" text-anchor="middle" fill="#e9d5ff" font-size="10" font-family="sans-serif">Nucleus</text>
+          <g transform="translate(218, 76) rotate(-18)">
+            <rect x="-30" y="-14" width="60" height="28" rx="14" fill="#7c2d12" stroke="#fb923c" stroke-width="2.5"/>
+            <path d="M-20,0 Q-13,-9 -6,0 T8,0 T20,0" fill="none" stroke="#fdba74" stroke-width="2"/>
+          </g>
+          <text x="220" y="42" text-anchor="middle" fill="#10b981" font-size="11" font-family="sans-serif" font-weight="bold">Animal Cell Organelles</text>
+        </svg>`,
+      plantcell: `
+        <svg viewBox="0 0 360 210" width="100%" height="100%">
+          <rect width="360" height="210" rx="14" fill="#080d1a"/>
+          <rect x="55" y="26" width="250" height="158" rx="18" fill="#064e3b" stroke="#10b981" stroke-width="4"/>
+          <rect x="65" y="36" width="230" height="138" rx="12" fill="#0f2922" stroke="#38bdf8" stroke-width="1.5"/>
+          <ellipse cx="185" cy="105" rx="66" ry="36" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+          <ellipse cx="105" cy="66" rx="18" ry="10" fill="#16a34a" stroke="#86efac" stroke-width="1.5"/>
+          <ellipse cx="255" cy="144" rx="18" ry="10" fill="#16a34a" stroke="#86efac" stroke-width="1.5"/>
+          <text x="185" y="109" text-anchor="middle" fill="#bfdbfe" font-size="11" font-family="sans-serif" font-weight="bold">Vacuole</text>
+        </svg>`,
+      prokaryote: `
+        <svg viewBox="0 0 360 210" width="100%" height="100%">
+          <rect width="360" height="210" rx="14" fill="#080d1a"/>
+          <rect x="65" y="56" width="210" height="98" rx="49" fill="#132238" stroke="#10b981" stroke-width="3"/>
+          <path d="M275,105 Q305,80 325,105 T355,100" fill="none" stroke="#a855f7" stroke-width="3"/>
+          <path d="M115,105 C125,80 155,130 165,100 C175,75 195,125 205,105" fill="none" stroke="#f472b6" stroke-width="3"/>
+          <circle cx="228" cy="90" r="11" fill="none" stroke="#facc15" stroke-width="2.5"/>
+          <text x="180" y="38" text-anchor="middle" fill="#facc15" font-size="11" font-family="sans-serif" font-weight="bold">Bacterial Cell (No Nucleus)</text>
+        </svg>`,
+      magnification: `
+        <svg viewBox="0 0 360 210" width="100%" height="100%">
+          <rect width="360" height="210" rx="14" fill="#080d1a"/>
+          <circle cx="180" cy="100" r="78" fill="#0f172a" stroke="#38bdf8" stroke-width="2.5"/>
+          <rect x="115" y="82" width="130" height="36" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+          <text x="180" y="158" text-anchor="middle" fill="#facc15" font-size="12" font-family="monospace" font-weight="bold">Magnification = Image ÷ Real</text>
+        </svg>`,
+      specialised: `
+        <svg viewBox="0 0 360 210" width="100%" height="100%">
+          <rect width="360" height="210" rx="14" fill="#080d1a"/>
+          <path d="M50,62 L140,62 L140,92 L310,92 L310,122 L140,122 L140,152 L50,152 Z" fill="#132a2e" stroke="#10b981" stroke-width="2.5"/>
+          <ellipse cx="95" cy="107" rx="25" ry="28" fill="#1d4ed8" opacity="0.45" stroke="#60a5fa" stroke-width="1.5"/>
+          <text x="180" y="34" text-anchor="middle" fill="#38bdf8" font-size="11" font-family="sans-serif" font-weight="bold">Specialised Cell Structure</text>
+        </svg>`,
+      mitosis: `
+        <svg viewBox="0 0 360 210" width="100%" height="100%">
+          <rect width="360" height="210" rx="14" fill="#080d1a"/>
+          <circle cx="180" cy="108" r="74" fill="#111827" stroke="#a855f7" stroke-width="2.5"/>
+          <line x1="180" y1="42" x2="180" y2="174" stroke="#475569" stroke-dasharray="4 4"/>
+          <path d="M135,78 L150,88 L135,98 M135,118 L150,128 L135,138" fill="none" stroke="#10b981" stroke-width="3"/>
+          <path d="M225,78 L210,88 L225,98 M225,118 L210,128 L225,138" fill="none" stroke="#38bdf8" stroke-width="3"/>
+          <text x="180" y="24" text-anchor="middle" fill="#e2e8f0" font-size="11" font-family="sans-serif">Chromosomes &amp; Mitosis</text>
+        </svg>`,
+      stemcells: `
+        <svg viewBox="0 0 360 210" width="100%" height="100%">
+          <rect width="360" height="210" rx="14" fill="#080d1a"/>
+          <circle cx="95" cy="105" r="34" fill="#312e81" stroke="#818cf8" stroke-width="2.5"/>
+          <text x="95" y="109" text-anchor="middle" fill="#e0e7ff" font-size="11" font-family="sans-serif" font-weight="bold">Stem Cell</text>
+          <path d="M140,90 L210,55 M140,105 L210,105 M140,120 L210,155" stroke="#10b981" stroke-width="2"/>
+          <rect x="220" y="40" width="95" height="28" rx="8" fill="#132a2e" stroke="#10b981"/>
+          <text x="267" y="58" text-anchor="middle" fill="#6ee7b7" font-size="10" font-family="sans-serif">Nerve Cell</text>
+          <rect x="220" y="91" width="95" height="28" rx="8" fill="#132a2e" stroke="#10b981"/>
+          <text x="267" y="109" text-anchor="middle" fill="#6ee7b7" font-size="10" font-family="sans-serif">Muscle Cell</text>
+          <rect x="220" y="142" width="95" height="28" rx="8" fill="#132a2e" stroke="#10b981"/>
+          <text x="267" y="160" text-anchor="middle" fill="#6ee7b7" font-size="10" font-family="sans-serif">Blood Cell</text>
+        </svg>`,
+      diffusion: `
+        <svg viewBox="0 0 360 210" width="100%" height="100%">
+          <rect width="360" height="210" rx="14" fill="#080d1a"/>
+          <line x1="180" y1="28" x2="180" y2="182" stroke="#38bdf8" stroke-width="3" stroke-dasharray="8 6"/>
+          <circle cx="80" cy="65" r="7" fill="#f472b6"/><circle cx="110" cy="90" r="7" fill="#f472b6"/>
+          <circle cx="70" cy="120" r="7" fill="#f472b6"/><circle cx="125" cy="140" r="7" fill="#f472b6"/>
+          <circle cx="95" cy="160" r="7" fill="#f472b6"/><circle cx="135" cy="60" r="7" fill="#f472b6"/>
+          <circle cx="265" cy="102" r="7" fill="#f472b6"/>
+          <path d="M150,105 L215,105" stroke="#10b981" stroke-width="3"/>
+          <polygon points="215,99 227,105 215,111" fill="#10b981"/>
+          <text x="180" y="198" text-anchor="middle" fill="#94a3b8" font-size="11" font-family="sans-serif">High Concentration → Low Concentration</text>
+        </svg>`,
+      osmosis: `
+        <svg viewBox="0 0 360 210" width="100%" height="100%">
+          <rect width="360" height="210" rx="14" fill="#080d1a"/>
+          <rect x="65" y="44" width="230" height="130" rx="10" fill="#0c4a6e" opacity="0.5" stroke="#38bdf8" stroke-width="2"/>
+          <rect x="125" y="78" width="110" height="62" rx="8" fill="#78350f" stroke="#fbbf24" stroke-width="2"/>
+          <text x="180" y="113" text-anchor="middle" fill="#fef3c7" font-size="11" font-family="sans-serif" font-weight="bold">Potato Tissue</text>
+          <text x="180" y="32" text-anchor="middle" fill="#38bdf8" font-size="11" font-family="sans-serif">Osmosis (Movement of Water)</text>
+        </svg>`,
+      activetransport: `
+        <svg viewBox="0 0 360 210" width="100%" height="100%">
+          <rect width="360" height="210" rx="14" fill="#080d1a"/>
+          <rect x="166" y="28" width="28" height="154" rx="8" fill="#581c87" stroke="#c084fc" stroke-width="2"/>
+          <circle cx="95" cy="105" r="8" fill="#10b981"/>
+          <circle cx="255" cy="65" r="8" fill="#10b981"/><circle cx="285" cy="90" r="8" fill="#10b981"/>
+          <circle cx="250" cy="125" r="8" fill="#10b981"/><circle cx="280" cy="150" r="8" fill="#10b981"/>
+          <path d="M120,105 L225,105" stroke="#facc15" stroke-width="3"/>
+          <polygon points="225,99 237,105 225,111" fill="#facc15"/>
+          <text x="180" y="198" text-anchor="middle" fill="#facc15" font-size="11" font-family="sans-serif" font-weight="bold">Low → High Concentration (Needs Energy)</text>
+        </svg>`
+    };
+
+    const TOPIC_TIPS = {
+      "Cell Structure": "Revise the 5 organelles found in all animal & plant cells, the 3 extra parts only in plant cells, and the magnification formula (Magnification = Image size ÷ Real size).",
+      "Cell Division": "Focus on the 3 stages of the cell cycle, remember that mitosis makes 2 identical body cells, and review where embryonic, adult bone marrow, and plant meristem stem cells come from.",
+      "Transport in Cells": "Learn the key difference: Diffusion & Osmosis move particles down a gradient without energy, while Active Transport moves substances from low to high concentration using energy from respiration."
+    };
+
+    // 50 BRAND-NEW FOUNDATION TIER AQA COMBINED SCIENCE (8464) CELL BIOLOGY QUESTIONS
+    const QUESTION_BANK = [
+      // === CELL STRUCTURE (22 Questions) ===
+      {
+        id: 1,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Animal & Plant Cells",
+        visualId: "mitochondria",
+        question: "Which part of a cell controls all the activities of the cell and contains the genetic material (DNA)?",
+        options: [
+          "Nucleus",
+          "Cytoplasm",
+          "Cell membrane",
+          "Ribosome"
+        ],
+        correctIndex: 0,
+        clue: "Think of this structure as the 'control centre' of the cell.",
+        explanation: "The nucleus contains the cell's genetic material (DNA) and controls the activities of the cell."
+      },
+      {
+        id: 2,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Animal & Plant Cells",
+        visualId: "mitochondria",
+        question: "Where do most of the chemical reactions take place inside an animal or plant cell?",
+        options: [
+          "Cytoplasm",
+          "Cell wall",
+          "Vacuole",
+          "Nucleus"
+        ],
+        correctIndex: 0,
+        clue: "It is a jelly-like liquid that fills most of the inside of the cell.",
+        explanation: "The cytoplasm is a jelly-like substance where most chemical reactions in the cell happen."
+      },
+      {
+        id: 3,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Animal & Plant Cells",
+        visualId: "mitochondria",
+        question: "What is the job of the cell membrane?",
+        options: [
+          "To control which substances enter and leave the cell.",
+          "To strengthen and support the outside of the cell.",
+          "To absorb sunlight for photosynthesis.",
+          "To release energy during respiration."
+        ],
+        correctIndex: 0,
+        clue: "It acts like a selective barrier around the cytoplasm.",
+        explanation: "The cell membrane holds the cell together and controls what goes in and out of the cell."
+      },
+      {
+        id: 4,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Animal & Plant Cells",
+        visualId: "mitochondria",
+        question: "Which sub-cellular structure is where aerobic respiration takes place to release energy for the cell?",
+        options: [
+          "Mitochondria",
+          "Ribosomes",
+          "Chloroplasts",
+          "Permanent vacuole"
+        ],
+        correctIndex: 0,
+        clue: "Active cells like muscle cells need lots of these.",
+        explanation: "Mitochondria are the site of aerobic respiration, which transfers energy for the cell to use."
+      },
+      {
+        id: 5,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Animal & Plant Cells",
+        visualId: "mitochondria",
+        question: "What is made inside the ribosomes of a cell?",
+        options: [
+          "Proteins",
+          "Glucose",
+          "Cellulose",
+          "Chlorophyll"
+        ],
+        correctIndex: 0,
+        clue: "Ribosomes join amino acids together.",
+        explanation: "Ribosomes are the small structures where proteins are made (protein synthesis)."
+      },
+      {
+        id: 6,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Plant Cells",
+        visualId: "plantcell",
+        question: "Which three structures are found in a green plant leaf cell, but NOT in an animal cell?",
+        options: [
+          "Cell wall, chloroplasts, and a permanent vacuole",
+          "Cell wall, mitochondria, and a permanent vacuole",
+          "Cell membrane, chloroplasts, and ribosomes",
+          "Nucleus, cell wall, and chloroplasts"
+        ],
+        correctIndex: 0,
+        clue: "Animal cells already have a nucleus, cytoplasm, cell membrane, mitochondria, and ribosomes.",
+        explanation: "Plant cells have three extra structures: a cellulose cell wall, chloroplasts, and a permanent vacuole."
+      },
+      {
+        id: 7,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Plant Cells",
+        visualId: "plantcell",
+        question: "What substance is a plant cell wall made of to give the cell strength and support?",
+        options: [
+          "Cellulose",
+          "Starch",
+          "Protein",
+          "Fat"
+        ],
+        correctIndex: 0,
+        clue: "This tough carbohydrate forms plant fibres.",
+        explanation: "Plant and algal cell walls are made of cellulose, which strengthens the cell."
+      },
+      {
+        id: 8,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Plant Cells",
+        visualId: "plantcell",
+        question: "What is inside the permanent vacuole of a plant cell?",
+        options: [
+          "Cell sap (a weak solution of sugar and salts)",
+          "Green chlorophyll pigment",
+          "DNA chromosomes",
+          "Digestive enzymes"
+        ],
+        correctIndex: 0,
+        clue: "When full of this liquid, the plant cell stays firm and rigid.",
+        explanation: "The permanent vacuole contains cell sap, which helps keep the plant cell firm and supported."
+      },
+      {
+        id: 9,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Plant Cells",
+        visualId: "plantcell",
+        question: "Why do chloroplasts look green and what is their job?",
+        options: [
+          "They contain chlorophyll to absorb light energy for photosynthesis.",
+          "They contain cell sap to absorb water from the soil.",
+          "They contain cellulose to protect the leaf from insects.",
+          "They contain mitochondria to carry out respiration at night."
+        ],
+        correctIndex: 0,
+        clue: "Plants need light energy to make their own food.",
+        explanation: "Chloroplasts contain the green pigment chlorophyll, which absorbs light energy needed for photosynthesis."
+      },
+      {
+        id: 10,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Bacterial Cells",
+        visualId: "prokaryote",
+        question: "Which statement is true about a bacterial (prokaryotic) cell?",
+        options: [
+          "It has no nucleus; its DNA floats free in the cytoplasm.",
+          "It has a large nucleus surrounded by a nuclear membrane.",
+          "It is much larger than an animal or plant cell.",
+          "It contains many chloroplasts for photosynthesis."
+        ],
+        correctIndex: 0,
+        clue: "Bacteria are simple single-celled prokaryotic organisms.",
+        explanation: "Bacterial cells are prokaryotic cells: they are much smaller than plant/animal cells and do not have a nucleus."
+      },
+      {
+        id: 11,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Bacterial Cells",
+        visualId: "prokaryote",
+        question: "What are the small extra rings of DNA found inside many bacterial cells called?",
+        options: [
+          "Plasmids",
+          "Ribosomes",
+          "Vacuoles",
+          "Chloroplasts"
+        ],
+        correctIndex: 0,
+        clue: "The word starts with the letter 'P'.",
+        explanation: "Along with a single main loop of DNA, bacteria often contain small rings of DNA called plasmids."
+      },
+      {
+        id: 12,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Specialised Cells",
+        visualId: "specialised",
+        question: "How is a sperm cell adapted to swim all the way to an egg cell?",
+        options: [
+          "It has a long tail (flagellum) and lots of mitochondria to release energy.",
+          "It has a large vacuole filled with cell sap and a thick cell wall.",
+          "It has long branched endings to send electrical messages.",
+          "It has no nucleus so it is lighter to swim."
+        ],
+        correctIndex: 0,
+        clue: "Swimming requires movement and plenty of energy from respiration.",
+        explanation: "A sperm cell has a streamlined head, a tail for swimming, and many mitochondria to release energy."
+      },
+      {
+        id: 13,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Specialised Cells",
+        visualId: "specialised",
+        question: "Why does a nerve cell (neurone) have a very long axon and branched endings?",
+        options: [
+          "To carry electrical impulses over long distances and connect with other nerve cells.",
+          "To absorb water and mineral ions quickly from the soil.",
+          "To contract and relax rapidly to move bones.",
+          "To trap dust and bacteria in the breathing tubes."
+        ],
+        correctIndex: 0,
+        clue: "Nerve cells form a communication network throughout the body.",
+        explanation: "Nerve cells are long to carry electrical signals across the body and have branched connections to link with other cells."
+      },
+      {
+        id: 14,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Specialised Cells",
+        visualId: "specialised",
+        question: "How are muscle cells adapted for their job of contracting to cause movement?",
+        options: [
+          "They contain special protein fibres that can shorten, and many mitochondria for energy.",
+          "They have a long hair-like projection to increase surface area.",
+          "They are hollow dead tubes strengthened with rings of lignin.",
+          "They are packed with chloroplasts to absorb sunlight."
+        ],
+        correctIndex: 0,
+        clue: "Muscles pull on bones by getting shorter (contracting).",
+        explanation: "Muscle cells contain protein fibres that slide over each other to contract, plus lots of mitochondria to supply energy."
+      },
+      {
+        id: 15,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Specialised Cells",
+        visualId: "specialised",
+        question: "How does the long, finger-like shape of a root hair cell help a plant?",
+        options: [
+          "It gives a large surface area to absorb water and mineral ions from the soil.",
+          "It helps the root hair cell trap sunlight for photosynthesis.",
+          "It allows the cell to swim through wet soil.",
+          "It carries sugars from the leaves down to the roots."
+        ],
+        correctIndex: 0,
+        clue: "More surface area means more water can enter the cell at once.",
+        explanation: "Root hair cells have a long projection that increases the surface area for absorbing water and minerals from soil."
+      },
+      {
+        id: 16,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Specialised Cells",
+        visualId: "specialised",
+        question: "Which statement describes xylem cells in a plant stem?",
+        options: [
+          "They are hollow dead cells joined end-to-end to carry water and mineral ions up the plant.",
+          "They are living cells with chloroplasts that make glucose in the roots.",
+          "They carry electrical impulses from the leaves to the flowers.",
+          "They have tails to push water up through the stem."
+        ],
+        correctIndex: 0,
+        clue: "Xylem acts like microscopic plumbing pipes for water.",
+        explanation: "Xylem cells are hollow (no end walls) and strengthened with lignin so water and minerals can flow easily from roots to leaves."
+      },
+      {
+        id: 17,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Specialised Cells",
+        visualId: "specialised",
+        question: "What is the main job of phloem cells in a plant?",
+        options: [
+          "To transport dissolved sugars around the plant.",
+          "To absorb mineral ions from the soil.",
+          "To absorb light energy for photosynthesis.",
+          "To strengthen the cell wall with cellulose."
+        ],
+        correctIndex: 0,
+        clue: "Remember: 'Phloem carries Food (sugars)'.",
+        explanation: "Phloem tubes carry dissolved sugars made in the leaves to the rest of the plant for energy or storage."
+      },
+      {
+        id: 18,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Microscopy",
+        visualId: "magnification",
+        question: "Why can an electron microscope show much smaller details inside a cell than a light microscope?",
+        options: [
+          "It has a much higher magnification and higher resolution (resolving power).",
+          "It uses brighter sunlight to shine through the specimen.",
+          "It is smaller and easier to carry around a school lab.",
+          "It lets scientists watch living cells divide in real time."
+        ],
+        correctIndex: 0,
+        clue: "Higher resolution means a clearer, sharper image of tiny structures.",
+        explanation: "Electron microscopes have much higher magnification and resolving power than light microscopes, letting us see inside mitochondria and ribosomes."
+      },
+      {
+        id: 19,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Microscopy",
+        visualId: "magnification",
+        question: "A student uses a microscope with a ×10 eyepiece lens and a ×20 objective lens. What is the total magnification?",
+        options: [
+          "×200",
+          "×30",
+          "×10",
+          "×2"
+        ],
+        correctIndex: 0,
+        clue: "Multiply the eyepiece lens magnification by the objective lens magnification.",
+        explanation: "Total magnification = 10 × 20 = ×200."
+      },
+      {
+        id: 20,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Microscopy",
+        visualId: "magnification",
+        question: "A drawing of a cell is 40 mm wide. The real cell is 0.1 mm wide. Use Magnification = Image size ÷ Real size to find the magnification.",
+        options: [
+          "×400",
+          "×4",
+          "×40",
+          "×0.0025"
+        ],
+        correctIndex: 0,
+        clue: "Divide 40 by 0.1 (which is the same as 40 × 10).",
+        explanation: "Magnification = Image size ÷ Real size = 40 ÷ 0.1 = ×400."
+      },
+      {
+        id: 21,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Required Practical 1",
+        visualId: "magnification",
+        question: "When preparing a microscope slide of onion skin cells, why do we add a drop of iodine stain?",
+        options: [
+          "To colour the cell parts (like the nucleus) so they are easier to see.",
+          "To keep the onion cells alive while we look at them.",
+          "To stick the glass slide onto the microscope stage.",
+          "To increase the magnification of the lenses."
+        ],
+        correctIndex: 0,
+        clue: "Without stain, onion cells look almost completely clear and see-through.",
+        explanation: "Stains like iodine add colour to transparent cell structures so the nucleus and cell wall show up clearly."
+      },
+      {
+        id: 22,
+        ref: "AQA 8464 Foundation • Cell Structure",
+        category: "Cell Structure",
+        topic: "Required Practical 1",
+        visualId: "magnification",
+        question: "Which objective lens should you ALWAYS select first when focusing a slide under a light microscope?",
+        options: [
+          "The lowest-power objective lens",
+          "The highest-power objective lens",
+          "Any lens with the stage pushed all the way to the bottom",
+          "Remove the eyepiece lens first"
+        ],
+        correctIndex: 0,
+        clue: "Starting on low power gives the widest view and stops the lens hitting the glass slide.",
+        explanation: "You should always start with the lowest-power objective lens to find the cells easily and avoid cracking the slide."
+      },
+
+      // === CELL DIVISION (12 Questions) ===
+      {
+        id: 23,
+        ref: "AQA 8464 Foundation • Cell Division",
+        category: "Cell Division",
+        topic: "Chromosomes",
+        visualId: "mitosis",
+        question: "Where inside an animal or plant cell are chromosomes found?",
+        options: [
+          "Inside the nucleus",
+          "Inside the ribosomes",
+          "Inside the cell wall",
+          "Inside the vacuole"
+        ],
+        correctIndex: 0,
+        clue: "Chromosomes are made of coiled-up DNA.",
+        explanation: "Chromosomes are coiled lengths of DNA found inside the nucleus of eukaryotic cells."
+      },
+      {
+        id: 24,
+        ref: "AQA 8464 Foundation • Cell Division",
+        category: "Cell Division",
+        topic: "Chromosomes",
+        visualId: "mitosis",
+        question: "How many chromosomes are normally found in a human body cell (such as a skin cell)?",
+        options: [
+          "46 chromosomes (23 pairs)",
+          "23 single chromosomes",
+          "10 chromosomes (5 pairs)",
+          "92 chromosomes (46 pairs)"
+        ],
+        correctIndex: 0,
+        clue: "Human body cells have 23 pairs of chromosomes.",
+        explanation: "Human body cells contain 23 pairs of chromosomes, making 46 chromosomes in total."
+      },
+      {
+        id: 25,
+        ref: "AQA 8464 Foundation • Cell Division",
+        category: "Cell Division",
+        topic: "Chromosomes",
+        visualId: "mitosis",
+        question: "What are short sections of a chromosome that control characteristics (like eye colour) called?",
+        options: [
+          "Genes",
+          "Plasmids",
+          "Membranes",
+          "Enzymes"
+        ],
+        correctIndex: 0,
+        clue: "Each chromosome carries hundreds or thousands of these instructions.",
+        explanation: "Each chromosome carries a large number of genes, which code for specific proteins and characteristics."
+      },
+      {
+        id: 26,
+        ref: "AQA 8464 Foundation • Cell Division",
+        category: "Cell Division",
+        topic: "The Cell Cycle",
+        visualId: "mitosis",
+        question: "What must happen to a cell's DNA BEFORE the cell divides by mitosis?",
+        options: [
+          "The DNA must replicate (make an exact copy of itself).",
+          "Half of the DNA must be destroyed.",
+          "The DNA must leave the cell through the cell membrane.",
+          "The DNA must turn into cellulose."
+        ],
+        correctIndex: 0,
+        clue: "Both new cells will need a complete set of chromosomes.",
+        explanation: "During Stage 1 of the cell cycle, the cell grows, makes more mitochondria and ribosomes, and replicates its DNA."
+      },
+      {
+        id: 27,
+        ref: "AQA 8464 Foundation • Cell Division",
+        category: "Cell Division",
+        topic: "Mitosis",
+        visualId: "mitosis",
+        question: "How many new cells are formed when one parent cell divides by mitosis?",
+        options: [
+          "2 genetically identical cells",
+          "4 genetically different cells",
+          "2 cells with half the normal number of chromosomes",
+          "1 giant cell with double the DNA"
+        ],
+        correctIndex: 0,
+        clue: "Mitosis makes exact copies of body cells.",
+        explanation: "Mitosis produces two genetically identical daughter cells, each with the full set of chromosomes."
+      },
+      {
+        id: 28,
+        ref: "AQA 8464 Foundation • Cell Division",
+        category: "Cell Division",
+        topic: "Mitosis",
+        visualId: "mitosis",
+        question: "Why do multicellular organisms (like humans and plants) need cell division by mitosis?",
+        options: [
+          "For growth and to repair or replace damaged cells.",
+          "To produce sperm and egg cells.",
+          "To absorb water through root hairs.",
+          "To break down food in the stomach."
+        ],
+        correctIndex: 0,
+        clue: "Think about how a baby grows or how a cut on your finger heals.",
+        explanation: "Mitosis is essential for the growth and development of organisms and for replacing damaged or worn-out cells."
+      },
+      {
+        id: 29,
+        ref: "AQA 8464 Foundation • Cell Division",
+        category: "Cell Division",
+        topic: "Mitosis",
+        visualId: "mitosis",
+        question: "What happens at the very end of the cell cycle after the nucleus has divided?",
+        options: [
+          "The cytoplasm and cell membrane divide to form two separate cells.",
+          "The cell wall dissolves completely.",
+          "The chromosomes disappear forever.",
+          "The two cells join back together into one."
+        ],
+        correctIndex: 0,
+        clue: "Once the two sets of chromosomes are at opposite ends, the cell splits down the middle.",
+        explanation: "In the final stage of the cell cycle, the cytoplasm and cell membrane divide to form two separate, identical cells."
+      },
+      {
+        id: 30,
+        ref: "AQA 8464 Foundation • Cell Division",
+        category: "Cell Division",
+        topic: "Stem Cells",
+        visualId: "stemcells",
+        question: "What is a stem cell?",
+        options: [
+          "An undifferentiated cell that can divide to make more cells and turn into different types of specialised cell.",
+          "A fully specialised nerve cell that cannot divide anymore.",
+          "A dead cell found in plant stems that carries water.",
+          "A bacterial cell that causes infections."
+        ],
+        correctIndex: 0,
+        clue: "Stem cells have not yet chosen their final specialised job.",
+        explanation: "A stem cell is an undifferentiated cell capable of giving rise to many more cells of the same type, or differentiating into specialised cells."
+      },
+      {
+        id: 31,
+        ref: "AQA 8464 Foundation • Cell Division",
+        category: "Cell Division",
+        topic: "Stem Cells",
+        visualId: "stemcells",
+        question: "Where are adult stem cells found in the human body that can make new blood cells?",
+        options: [
+          "Bone marrow",
+          "Enamel on teeth",
+          "Hair shafts",
+          "Fingernails"
+        ],
+        correctIndex: 0,
+        clue: "This soft tissue is found inside the centre of large bones.",
+        explanation: "Adult stem cells from bone marrow can differentiate into several types of cell, including red and white blood cells."
+      },
+      {
+        id: 32,
+        ref: "AQA 8464 Foundation • Cell Division",
+        category: "Cell Division",
+        topic: "Stem Cells",
+        visualId: "stemcells",
+        question: "How do embryonic stem cells differ from adult bone marrow stem cells?",
+        options: [
+          "Embryonic stem cells can turn into almost any type of human cell, whereas adult stem cells can only form certain types.",
+          "Adult stem cells can turn into any human cell, whereas embryonic stem cells only make blood.",
+          "Embryonic stem cells come from plant roots.",
+          "Adult stem cells are found only in unborn babies."
+        ],
+        correctIndex: 0,
+        clue: "Early embryos need to grow into every single tissue in the body.",
+        explanation: "Stem cells from human embryos can differentiate into most types of human cell, whereas adult stem cells are more limited."
+      },
+      {
+        id: 33,
+        ref: "AQA 8464 Foundation • Cell Division",
+        category: "Cell Division",
+        topic: "Stem Cells",
+        visualId: "stemcells",
+        question: "Which medical conditions could potentially be treated using stem cells in the future?",
+        options: [
+          "Diabetes and paralysis (spinal cord injuries)",
+          "Broken bones caused by falling off a bike",
+          "Bacterial food poisoning",
+          "Short-sightedness caused by needing glasses"
+        ],
+        correctIndex: 0,
+        clue: "Stem cells could replace damaged insulin-making cells or damaged nerve cells.",
+        explanation: "Stem cells may be used to help conditions such as diabetes (making new insulin-producing cells) and paralysis (replacing damaged nerve cells)."
+      },
+      {
+        id: 34,
+        ref: "AQA 8464 Foundation • Cell Division",
+        category: "Cell Division",
+        topic: "Plant Stem Cells",
+        visualId: "stemcells",
+        question: "Where are stem cells found in plants, and how are they useful to farmers and scientists?",
+        options: [
+          "In meristem tissue (at root and shoot tips); they can be used to clone rare plants or disease-resistant crops quickly.",
+          "In dead xylem tubes; they are used to make fertiliser.",
+          "In flower petals; they are used to attract bees.",
+          "In the waxy leaf surface; they are used to stop rain entering."
+        ],
+        correctIndex: 0,
+        clue: "Plants grow taller from the tips of their roots and shoots.",
+        explanation: "Plant stem cells are found in meristem tissue and can be used to clone rare species quickly and economically or grow disease-resistant crops."
+      },
+
+      // === TRANSPORT IN CELLS (16 Questions) ===
+      {
+        id: 35,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Diffusion",
+        visualId: "diffusion",
+        question: "Which sentence best describes diffusion?",
+        options: [
+          "The spreading out of particles from an area of higher concentration to an area of lower concentration.",
+          "The movement of particles from low concentration to high concentration using energy.",
+          "The movement of water only through a cell wall.",
+          "The pumping of blood around the body by the heart."
+        ],
+        correctIndex: 0,
+        clue: "Think about how perfume spreads across a room from where it was sprayed.",
+        explanation: "Diffusion is the spreading out of particles of a gas or substance in solution, resulting in a net movement from higher to lower concentration."
+      },
+      {
+        id: 36,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Diffusion",
+        visualId: "diffusion",
+        question: "Which gas moves by diffusion from the air in the lungs into the blood?",
+        options: [
+          "Oxygen",
+          "Carbon dioxide",
+          "Nitrogen",
+          "Helium"
+        ],
+        correctIndex: 0,
+        clue: "Your cells need this gas for aerobic respiration.",
+        explanation: "Oxygen is at a higher concentration in the lung alveoli than in the blood, so it diffuses into the blood."
+      },
+      {
+        id: 37,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Diffusion",
+        visualId: "diffusion",
+        question: "Which waste product diffuses out of body cells into the blood plasma to be removed by the kidneys?",
+        options: [
+          "Urea",
+          "Glucose",
+          "Oxygen",
+          "Chlorophyll"
+        ],
+        correctIndex: 0,
+        clue: "This waste chemical leaves the body in urine.",
+        explanation: "Urea is a waste product that diffuses from cells into the blood plasma for excretion in the kidney."
+      },
+      {
+        id: 38,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Factors Affecting Diffusion",
+        visualId: "diffusion",
+        question: "How does increasing the temperature affect the rate of diffusion?",
+        options: [
+          "Diffusion happens faster because the particles have more kinetic energy and move quicker.",
+          "Diffusion slows down because the particles freeze in place.",
+          "Temperature has no effect on the speed of diffusion.",
+          "Diffusion stops completely above 25 °C."
+        ],
+        correctIndex: 0,
+        clue: "Warmer particles move around faster and bump into each other more.",
+        explanation: "Higher temperature gives particles more energy so they move faster, increasing the rate of diffusion."
+      },
+      {
+        id: 39,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Factors Affecting Diffusion",
+        visualId: "diffusion",
+        question: "Which three factors increase the rate of diffusion across a cell membrane?",
+        options: [
+          "A bigger concentration difference, a higher temperature, and a larger surface area.",
+          "A smaller concentration difference, a lower temperature, and a thicker membrane.",
+          "More chloroplasts, a thicker cell wall, and less water.",
+          "A smaller surface area, lower temperature, and fewer mitochondria."
+        ],
+        correctIndex: 0,
+        clue: "Think: steeper gradient, warmer temperature, and wider doorway (surface area).",
+        explanation: "Diffusion is faster when there is a larger difference in concentration, a higher temperature, and a larger membrane surface area."
+      },
+      {
+        id: 40,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Exchange Surfaces",
+        visualId: "diffusion",
+        question: "Why do small intestine villi and lung alveoli have very thin walls (only one cell thick)?",
+        options: [
+          "To give a short diffusion distance so substances can cross quickly.",
+          "To stop any oxygen or food from passing into the blood.",
+          "To make the organs heavy and rigid.",
+          "To store large amounts of fat."
+        ],
+        correctIndex: 0,
+        clue: "A shorter distance means particles take less time to cross.",
+        explanation: "Exchange surfaces have thin membranes to provide a short diffusion path for faster exchange."
+      },
+      {
+        id: 41,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Exchange Surfaces",
+        visualId: "diffusion",
+        question: "Why can a single-celled organism (like an amoeba) get enough oxygen just through its outer surface, while a human cannot?",
+        options: [
+          "A single-celled organism has a large surface area compared to its small volume.",
+          "A single-celled organism does not need any oxygen to stay alive.",
+          "Humans have a larger surface area to volume ratio than bacteria.",
+          "Amoebas have lungs and a heart inside their single cell."
+        ],
+        correctIndex: 0,
+        clue: "Tiny objects have a much larger surface area relative to their volume than big animals.",
+        explanation: "Single-celled organisms have a relatively large surface area to volume ratio, so simple diffusion meets all their needs."
+      },
+      {
+        id: 42,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Osmosis",
+        visualId: "osmosis",
+        question: "Which molecules move during osmosis?",
+        options: [
+          "Water molecules only",
+          "Sugar molecules only",
+          "Salt ions only",
+          "Oxygen gas molecules"
+        ],
+        correctIndex: 0,
+        clue: "Osmosis is a special type of diffusion just for water.",
+        explanation: "Osmosis is the diffusion of water from a dilute solution to a concentrated solution through a partially permeable membrane."
+      },
+      {
+        id: 43,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Osmosis",
+        visualId: "osmosis",
+        question: "In which direction does water move during osmosis?",
+        options: [
+          "From a dilute solution (lots of water) to a more concentrated solution (less water).",
+          "From a concentrated solution to a dilute solution.",
+          "From inside a dry seed out into pure water.",
+          "Water never moves through a cell membrane."
+        ],
+        correctIndex: 0,
+        clue: "Water moves from where there is a higher concentration of water to where there is less water.",
+        explanation: "Water moves by osmosis from a dilute solution to a more concentrated solution through a partially permeable membrane."
+      },
+      {
+        id: 44,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Required Practical 2",
+        visualId: "osmosis",
+        question: "A piece of potato is placed into a beaker of pure distilled water. What happens to the mass of the potato?",
+        options: [
+          "Its mass increases because water enters the potato cells by osmosis.",
+          "Its mass decreases because water leaves the potato cells.",
+          "Its mass stays completely unchanged.",
+          "Its mass drops to zero because the potato dissolves."
+        ],
+        correctIndex: 0,
+        clue: "Pure water is more dilute than the liquid inside the potato cells.",
+        explanation: "Water moves into the potato cells from the pure water by osmosis, causing the potato cylinder to gain mass."
+      },
+      {
+        id: 45,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Required Practical 2",
+        visualId: "osmosis",
+        question: "A piece of potato is placed into a very concentrated sugar solution. What happens to the potato?",
+        options: [
+          "It loses mass and becomes soft because water moves out of the cells by osmosis.",
+          "It gains mass and swells up because sugar rushes into the cells.",
+          "It bursts open because it has no cell wall.",
+          "It turns bright green and starts photosynthesising."
+        ],
+        correctIndex: 0,
+        clue: "The solution outside the potato is more concentrated than inside the cells.",
+        explanation: "Water leaves the potato cells into the concentrated sugar solution by osmosis, so the potato loses mass."
+      },
+      {
+        id: 46,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Required Practical 2",
+        visualId: "osmosis",
+        question: "Before weighing a potato cylinder taken out of sugar solution, why should you gently blot it with a paper towel?",
+        options: [
+          "To remove extra water drops on the outside so they don't add to the mass.",
+          "To squeeze all the water out from inside the cells.",
+          "To warm the potato up to room temperature.",
+          "To rub off the outer skin of the potato."
+        ],
+        correctIndex: 0,
+        clue: "Drops of liquid clinging to the outside would make the reading inaccurate.",
+        explanation: "Blotting gently removes surface liquid so you only measure the mass of the potato tissue itself."
+      },
+      {
+        id: 47,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Active Transport",
+        visualId: "activetransport",
+        question: "How is active transport different from diffusion and osmosis?",
+        options: [
+          "It moves substances from low concentration to high concentration and requires energy from respiration.",
+          "It moves substances from high concentration to low concentration without using any energy.",
+          "It only happens in dead cells that have no mitochondria.",
+          "It only moves water molecules down a slope."
+        ],
+        correctIndex: 0,
+        clue: "The word 'active' means the cell has to use energy to pump substances.",
+        explanation: "Active transport moves substances against a concentration gradient (low to high) and requires energy from respiration."
+      },
+      {
+        id: 48,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Active Transport",
+        visualId: "activetransport",
+        question: "Where does a cell get the energy needed for active transport?",
+        options: [
+          "From cellular respiration in the mitochondria",
+          "From sunlight hitting the cell membrane",
+          "From water stored in the vacuole",
+          "From osmosis in the cell wall"
+        ],
+        correctIndex: 0,
+        clue: "Which organelle releases energy for the cell?",
+        explanation: "Active transport requires energy released by respiration in the mitochondria."
+      },
+      {
+        id: 49,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Active Transport in Plants",
+        visualId: "activetransport",
+        question: "Why do plant root hair cells need active transport to absorb mineral ions from the soil?",
+        options: [
+          "Because the concentration of mineral ions is lower in the soil than inside the root hair cell.",
+          "Because mineral ions are too big to move by diffusion.",
+          "Because there are more mineral ions in the soil than inside the plant.",
+          "Because root hair cells have no cell membrane."
+        ],
+        correctIndex: 0,
+        clue: "Minerals have to be pumped from a dilute soil solution into a more concentrated root cell.",
+        explanation: "Soil water usually has a lower concentration of mineral ions than the root cell, so active transport is needed to absorb them against the gradient."
+      },
+      {
+        id: 50,
+        ref: "AQA 8464 Foundation • Transport in Cells",
+        category: "Transport in Cells",
+        topic: "Active Transport in Humans",
+        visualId: "activetransport",
+        question: "In the human small intestine, how is glucose (sugar) absorbed into the blood when there is already more glucose in the blood than in the gut?",
+        options: [
+          "By active transport, using energy from respiration.",
+          "By diffusion from low concentration to high concentration.",
+          "By osmosis through the cell wall.",
+          "By photosynthesis in the stomach."
+        ],
+        correctIndex: 0,
+        clue: "Moving glucose from lower concentration in the gut to higher concentration in the blood goes against the gradient.",
+        explanation: "Active transport allows sugar molecules (glucose) to be absorbed from lower concentrations in the gut into the blood, which has a higher sugar concentration."
+      }
+    ];
+
+    let selectedTopic = "ALL";
+    let selectedQuestionCount = 10;
+    let currentUser = null;
+    let quizQuestions = [];
+    let currentIdx = 0;
+    let score = 0;
+    let streak = 0;
+    let bestStreak = 0;
+    let answeredCurrent = false;
+    let timerInterval = null;
+    let elapsedSeconds = 0;
+    let topicStats = {};
+    let sessionHistory = [];
+    let isMissedRetryMode = false;
+
+    function selectTopic(topicName, btnEl) {
+      selectedTopic = topicName;
+      document.querySelectorAll("#topicSelector .choice-pill-btn").forEach(b => b.classList.remove("active"));
+      btnEl.classList.add("active");
+    }
+
+    function selectLength(count, btnEl) {
+      selectedQuestionCount = count;
+      document.querySelectorAll("#lengthSelector .choice-pill-btn").forEach(b => b.classList.remove("active"));
+      btnEl.classList.add("active");
+    }
+
+    function showView(viewName) {
+      document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+      document.getElementById(viewName).classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function handleStart(e) {
+      e.preventDefault();
+      const name = document.getElementById("studentName").value.trim();
+      const errBox = document.getElementById("loginError");
+
+      if (!name) {
+        errBox.textContent = "Please enter your name before starting the quiz.";
+        errBox.style.display = "block";
+        return;
+      }
+
+      errBox.style.display = "none";
+      currentUser = { name };
+
+      document.getElementById("chipName").textContent = name;
+      document.getElementById("userChip").style.display = "flex";
+      document.getElementById("btnStrengths").style.display = "inline-flex";
+      document.getElementById("btnSwitchUser").style.display = "inline-flex";
+
+      isMissedRetryMode = false;
+      startQuiz();
+    }
+
+    function resetToStart() {
+      stopTimer();
+      document.getElementById("userChip").style.display = "none";
+      document.getElementById("btnStrengths").style.display = "none";
+      document.getElementById("btnSwitchUser").style.display = "none";
+      showView("viewLogin");
+    }
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function initTopicStats() {
+      topicStats = {
+        "Cell Structure": { attempted: 0, correct: 0 },
+        "Cell Division": { attempted: 0, correct: 0 },
+        "Transport in Cells": { attempted: 0, correct: 0 }
+      };
+    }
+
+    function startQuiz(customQuestionList = null) {
+      initTopicStats();
+      sessionHistory = [];
+
+      let sourceQuestions;
+      if (customQuestionList && customQuestionList.length > 0) {
+        sourceQuestions = shuffleArray(customQuestionList);
+      } else {
+        const filteredPool =
+          selectedTopic === "ALL"
+            ? QUESTION_BANK
+            : QUESTION_BANK.filter(q => q.category === selectedTopic);
+        sourceQuestions = shuffleArray(filteredPool).slice(0, selectedQuestionCount);
+      }
+
+      quizQuestions = sourceQuestions.map(q => {
+        const indexedOptions = q.options.map((text, idx) => ({
+          text,
+          isCorrect: idx === q.correctIndex
+        }));
+        return {
+          ...q,
+          shuffledOptions: shuffleArray(indexedOptions)
+        };
+      });
+
+      currentIdx = 0;
+      score = 0;
+      streak = 0;
+      bestStreak = 0;
+      elapsedSeconds = 0;
+
+      document.getElementById("btn5050").disabled = false;
+      document.getElementById("btnClue").disabled = false;
+
+      startTimer();
+      showView("viewQuiz");
+      renderQuestion();
+    }
+
+    function restartQuiz() {
+      isMissedRetryMode = false;
+      startQuiz();
+    }
+
+    function retryMissedQuestions() {
+      const missedOriginalQuestions = sessionHistory
+        .filter(item => !item.isCorrect)
+        .map(item => item.questionObj);
+      if (missedOriginalQuestions.length === 0) return;
+      isMissedRetryMode = true;
+      startQuiz(missedOriginalQuestions);
+    }
+
+    function startTimer() {
+      stopTimer();
+      updateTimerDisplay();
+      timerInterval = setInterval(() => {
+        elapsedSeconds++;
+        updateTimerDisplay();
+      }, 1000);
+    }
+
+    function stopTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+    }
+
+    function formatTime(totalSecs) {
+      const mins = String(Math.floor(totalSecs / 60)).padStart(2, "0");
+      const secs = String(totalSecs % 60).padStart(2, "0");
+      return `${mins}:${secs}`;
+    }
+
+    function updateTimerDisplay() {
+      document.getElementById("hudTimer").textContent = formatTime(elapsedSeconds);
+    }
+
+    function renderQuestion() {
+      answeredCurrent = false;
+      const q = quizQuestions[currentIdx];
+      const total = quizQuestions.length;
+
+      document.getElementById("hudProgress").textContent = `${currentIdx + 1} / ${total}`;
+      document.getElementById("hudStreak").textContent = `${streak} 🔥`;
+      document.getElementById("hudScore").textContent = score;
+      document.getElementById("progressBarFill").style.width = `${((currentIdx + 1) / total) * 100}%`;
+
+      document.getElementById("specimenTag").textContent = `DIAGRAM ${String(currentIdx + 1).padStart(2, "0")}`;
+      document.getElementById("specimenTopic").textContent = q.topic;
+      document.getElementById("specimenCanvas").innerHTML = SPECIMEN_SVGS[q.visualId] || "";
+      document.getElementById("clueBox").style.display = "none";
+      document.getElementById("clueBox").textContent = "";
+
+      document.getElementById("qRef").textContent = isMissedRetryMode
+        ? `${q.ref} • Missed Question Retry`
+        : `${q.ref} • 1 Mark`;
+      document.getElementById("qCategoryBadge").textContent = q.category;
+      document.getElementById("questionText").textContent = q.question;
+      document.getElementById("feedbackDrawer").style.display = "none";
+
+      const letters = ["A", "B", "C", "D"];
+      const container = document.getElementById("optionsContainer");
+      container.innerHTML = "";
+
+      q.shuffledOptions.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.dataset.correct = opt.isCorrect ? "1" : "0";
+        btn.innerHTML = `<span class="opt-letter">${letters[i]}</span><span class="opt-text">${opt.text}</span>`;
+        btn.onclick = () => selectAnswer(btn, opt.text, opt.isCorrect, q);
+        container.appendChild(btn);
+      });
+
+      document.getElementById("btnNext").textContent =
+        currentIdx === total - 1 ? "Finish Quiz & See Results →" : "Next Question →";
+    }
+
+    function selectAnswer(clickedBtn, chosenText, isCorrect, q) {
+      if (answeredCurrent) return;
+      answeredCurrent = true;
+
+      if (!topicStats[q.category]) {
+        topicStats[q.category] = { attempted: 0, correct: 0 };
+      }
+      topicStats[q.category].attempted++;
+      if (isCorrect) topicStats[q.category].correct++;
+
+      const correctOpt = q.shuffledOptions.find(o => o.isCorrect);
+      sessionHistory.push({
+        questionObj: q,
+        chosenText,
+        correctText: correctOpt ? correctOpt.text : q.options[q.correctIndex],
+        isCorrect
+      });
+
+      const allBtns = document.querySelectorAll(".option-btn");
+      allBtns.forEach(btn => {
+        btn.disabled = true;
+        if (btn.dataset.correct === "1") {
+          btn.classList.add("correct");
+        }
+      });
+
+      const titleEl = document.getElementById("feedbackTitle");
+      if (isCorrect) {
+        clickedBtn.classList.add("correct");
+        score++;
+        streak++;
+        if (streak > bestStreak) bestStreak = streak;
+        titleEl.textContent = "✓ Correct! Well done.";
+        titleEl.style.color = "#10b981";
+      } else {
+        clickedBtn.classList.add("wrong");
+        streak = 0;
+        titleEl.textContent = "✗ Not quite — check the explanation below:";
+        titleEl.style.color = "#fb7185";
+      }
+
+      document.getElementById("hudScore").textContent = score;
+      document.getElementById("hudStreak").textContent = `${streak} 🔥`;
+      document.getElementById("feedbackText").textContent = q.explanation;
+      document.getElementById("feedbackDrawer").style.display = "block";
+    }
+
+    function use5050() {
+      if (answeredCurrent) return;
+      const btn5050 = document.getElementById("btn5050");
+      if (btn5050.disabled) return;
+      btn5050.disabled = true;
+
+      const wrongBtns = Array.from(document.querySelectorAll(".option-btn")).filter(
+        b => b.dataset.correct === "0"
+      );
+      shuffleArray(wrongBtns).slice(0, 2).forEach(b => {
+        b.disabled = true;
+        b.classList.add("eliminated");
+      });
+    }
+
+    function useClue() {
+      const btnClue = document.getElementById("btnClue");
+      if (btnClue.disabled) return;
+      btnClue.disabled = true;
+
+      const q = quizQuestions[currentIdx];
+      const clueBox = document.getElementById("clueBox");
+      clueBox.textContent = `Helpful Clue: ${q.clue}`;
+      clueBox.style.display = "block";
+    }
+
+    function nextQuestion() {
+      if (currentIdx < quizQuestions.length - 1) {
+        currentIdx++;
+        renderQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function calculateFoundationGrade(pct) {
+      if (pct >= 75) return "5-5";
+      if (pct >= 62) return "5-4";
+      if (pct >= 50) return "4-4";
+      if (pct >= 38) return "4-3";
+      if (pct >= 26) return "3-3";
+      return "2-2";
+    }
+
+    function getEncouragingMessage(pct, name) {
+      if (pct >= 80) {
+        return `Brilliant work, ${name}! You have a strong command of Foundation Cell Biology and are well on track for top Foundation grades.`;
+      }
+      if (pct >= 60) {
+        return `Solid effort, ${name}! You already know the core ideas well—reviewing any missed questions below will push your score even higher.`;
+      }
+      if (pct >= 40) {
+        return `Good start, ${name}! You are building your confidence—use the topic breakdown below to focus on one topic at a time.`;
+      }
+      return `Keep going, ${name}! Every question you review helps lock in the key facts—try retrying your missed questions to boost your score.`;
+    }
+
+    function buildTopicCardsHTML() {
+      return Object.entries(topicStats)
+        .map(([category, data]) => {
+          const pct = data.attempted > 0 ? Math.round((data.correct / data.attempted) * 100) : null;
+          let badgeClass = "untested";
+          let badgeText = "Not Tested";
+          let barColor = "#475569";
+          let barWidth = 0;
+
+          if (pct !== null) {
+            barWidth = pct;
+            if (pct >= 70) {
+              badgeClass = "strength";
+              badgeText = `Strength (${pct}%)`;
+              barColor = "#10b981";
+            } else if (pct >= 50) {
+              badgeClass = "developing";
+              badgeText = `Developing (${pct}%)`;
+              barColor = "#facc15";
+            } else {
+              badgeClass = "weakness";
+              badgeText = `Focus Area (${pct}%)`;
+              barColor = "#fb7185";
+            }
+          }
+
+          return `
+            <div class="diag-card">
+              <div class="diag-card-top">
+                <strong>${category}</strong>
+                <span class="status-tag ${badgeClass}">${badgeText}</span>
+              </div>
+              <div class="topic-bar-bg">
+                <div class="topic-bar-fill" style="width:${barWidth}%; background:${barColor};"></div>
+              </div>
+              <div style="font-size:0.82rem; color:var(--text-muted);">
+                ${data.correct} correct out of ${data.attempted} questions
+              </div>
+              <div class="diag-tip">${TOPIC_TIPS[category] || ""}</div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    function finishQuiz() {
+      stopTimer();
+      showView("viewResults");
+
+      const total = quizQuestions.length;
+      const pct = Math.round((score / total) * 100);
+      const missedCount = sessionHistory.filter(item => !item.isCorrect).length;
+
+      document.getElementById("resGrade").textContent = calculateFoundationGrade(pct);
+      document.getElementById("resHeadline").textContent = `Quiz Complete, ${currentUser.name}!`;
+      document.getElementById("resSubline").textContent = getEncouragingMessage(pct, currentUser.name);
+
+      document.getElementById("resScore").textContent = `${score} / ${total}`;
+      document.getElementById("resPercent").textContent = `${pct}%`;
+      document.getElementById("resStreak").textContent = `${bestStreak} 🔥`;
+      document.getElementById("resTime").textContent = formatTime(elapsedSeconds);
+
+      const retryBtn = document.getElementById("btnRetryMissed");
+      if (missedCount > 0) {
+        retryBtn.style.display = "inline-flex";
+        document.getElementById("missedCountBadge").textContent = missedCount;
+      } else {
+        retryBtn.style.display = "none";
+      }
+
+      document.getElementById("resultsTopicGrid").innerHTML = buildTopicCardsHTML();
+
+      const reviewContainer = document.getElementById("reviewListContainer");
+      reviewContainer.innerHTML = sessionHistory
+        .map((item, idx) => {
+          const statusClass = item.isCorrect ? "is-correct" : "is-wrong";
+          const statusLabel = item.isCorrect
+            ? `<span style="color:#10b981; font-weight:700;">✓ Correct</span>`
+            : `<span style="color:#fb7185; font-weight:700;">✗ Incorrect</span>`;
+          return `
+            <div class="review-item ${statusClass}">
+              <div class="review-item-header">
+                <span style="color:var(--cyan); font-weight:700;">Q${idx + 1} • ${item.questionObj.category}</span>
+                ${statusLabel}
+              </div>
+              <div class="review-q-text">${item.questionObj.question}</div>
+              <div class="review-answers">
+                <div><strong>Your Answer:</strong> <span style="color:${item.isCorrect ? "#6ee7b7" : "#fecdd3"};">${item.chosenText}</span></div>
+                ${!item.isCorrect ? `<div><strong>Correct Answer:</strong> <span style="color:#6ee7b7;">${item.correctText}</span></div>` : ""}
+              </div>
+              <div class="review-exp"><strong>Revision Note:</strong> ${item.questionObj.explanation}</div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    function openAnalysisModal() {
+      document.getElementById("modalTopicGrid").innerHTML = buildTopicCardsHTML();
+      document.getElementById("analysisModal").style.display = "flex";
+    }
+
+    function closeAnalysisModal() {
+      document.getElementById("analysisModal").style.display = "none";
+    }
+
+    function closeAnalysisOnBackdrop(e) {
+      if (e.target.id === "analysisModal") {
+        closeAnalysisModal();
+      }
+    }
+  </script>
+</body>
+</html>
